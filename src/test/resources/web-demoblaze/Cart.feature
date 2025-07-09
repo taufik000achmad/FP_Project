@@ -32,7 +32,7 @@ Feature: Cart
     And User input name with "zilong"
     And User input country with "Indonesia"
     And User input city with "Bandung"
-    Then User input credit card with "123456xxxc7890"
+    Then User input credit card with "12345632347890"
     And User input month with "08"
     And User input year with "2027"
     And User click button purchase

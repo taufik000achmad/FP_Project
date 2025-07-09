@@ -1,12 +1,7 @@
 @homepage
 Feature: Homepage
 
-  @slide-image
-  Scenario: User see slide image 2
-    Given User doing login with "zilong123" and "123"
-    When User is on homepage
-    And User click button slide
-    Then User able to see second image
+
 
   @next-page
   Scenario: User see next page

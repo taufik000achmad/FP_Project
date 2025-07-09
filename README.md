@@ -67,4 +67,4 @@ Both layers use the **Cucumber** framework for behavior-driven development (BDD)
 ./gradlew cucumber
 
 # Run scenarios by tag
-./gradlew cucumber -Ptags="@tag-name"
+
