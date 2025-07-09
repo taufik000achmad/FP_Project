@@ -1,7 +1,10 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version "2.11.2"
 }
-
+allure {
+    version = '2.19.0'
+}
 group = 'org.example'
 version = '1.0-SNAPSHOT'
 
@@ -28,5 +31,35 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnit() {
+
+        testLogging {
+            showStandardStreams = true
+            events "passed", "failed", "skipped"
+        }
+    }
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+def tags = (findProperty('tags') == null) ? 'not @exclude' : findProperty('tags') + ' and not @exclude'
+
+tasks.register("CucumberWebApi", JavaExec) {
+    group = "verification"
+    description = "Running Web and API Test"
+
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    mainClass.set("io.cucumber.core.cli.Main")
+
+    args = [
+            '--plugin', 'html:reports/report.html',
+            '--plugin', 'pretty',
+            '--glue', 'com.achmad',
+            '--tags', "${tags}",
+            'src/test/resources'
+    ]
 }
